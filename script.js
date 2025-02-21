@@ -38,6 +38,13 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   doc.save('epic-story.pdf');
 });
 
+// Clear Text
+document.getElementById('clear-text').addEventListener('click', function () {
+  document.getElementById('story-form').reset();
+  document.getElementById('generated-story').textContent = '';
+  document.getElementById('story-preview').classList.add('hidden');
+});
+
 // Story Generator Function
 function generateStory(genre, character, setting, paragraphs) {
   const plotPoints = [
