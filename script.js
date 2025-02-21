@@ -16,14 +16,6 @@ document.getElementById('story-form').addEventListener('submit', function (e) {
   // Generate a detailed story
   const story = generateStory(genre, character, setting, paragraphs);
 
-  // Save the story to localStorage
-  localStorage.setItem('generatedStory', story);
-  localStorage.setItem('genre', genre);
-  localStorage.setItem('character', character);
-  localStorage.setItem('setting', setting);
-  localStorage.setItem('paragraphs', paragraphs);
-
-  // Display the story
   document.getElementById('generated-story').textContent = story;
   document.getElementById('story-preview').classList.remove('hidden');
 });
@@ -74,13 +66,6 @@ document.getElementById('clear-text').addEventListener('click', function () {
   document.getElementById('story-form').reset();
   document.getElementById('generated-story').textContent = '';
   document.getElementById('story-preview').classList.add('hidden');
-
-  // Clear localStorage
-  localStorage.removeItem('generatedStory');
-  localStorage.removeItem('genre');
-  localStorage.removeItem('character');
-  localStorage.removeItem('setting');
-  localStorage.removeItem('paragraphs');
 });
 
 // Story Generator Function
@@ -99,21 +84,3 @@ function generateStory(genre, character, setting, paragraphs) {
   }
   return story.trim();
 }
-
-// Restore Story on Page Load
-window.addEventListener('load', function () {
-  const savedStory = localStorage.getItem('generatedStory');
-
-  if (savedStory) {
-    // Skip the intro page and go straight to the main page
-    showMainPage();
-
-    // Restore the story and form inputs
-    document.getElementById('generated-story').textContent = savedStory;
-    document.getElementById('genre').value = localStorage.getItem('genre');
-    document.getElementById('character').value = localStorage.getItem('character');
-    document.getElementById('setting').value = localStorage.getItem('setting');
-    document.getElementById('paragraphs').value = localStorage.getItem('paragraphs');
-    document.getElementById('story-preview').classList.remove('hidden');
-  }
-});
