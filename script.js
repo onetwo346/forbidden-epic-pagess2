@@ -34,15 +34,29 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   const lines = doc.splitTextToSize(story, 180);
   doc.text(lines, 10, 30);
 
-  // Save the PDF directly without opening a new tab
+  // Save the PDF as a Blob
   const pdfBlob = doc.output('blob');
+
+  // Create a temporary URL for the Blob
   const pdfUrl = URL.createObjectURL(pdfBlob);
 
+  // Create a hidden <a> tag to handle the download
   const a = document.createElement('a');
   a.href = pdfUrl;
   a.download = 'epic-story.pdf';
+  a.style.display = 'none';
   document.body.appendChild(a);
-  a.click();
+
+  // Fallback for Safari on iOS
+  if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+    // Open the PDF in a new tab for Safari on iOS
+    window.open(pdfUrl, '_blank');
+  } else {
+    // Trigger the download for other devices
+    a.click();
+  }
+
+  // Clean up
   document.body.removeChild(a);
   URL.revokeObjectURL(pdfUrl);
 });
