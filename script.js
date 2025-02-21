@@ -11,9 +11,10 @@ document.getElementById('story-form').addEventListener('submit', function (e) {
   const genre = document.getElementById('genre').value;
   const character = document.getElementById('character').value;
   const setting = document.getElementById('setting').value;
+  const paragraphs = parseInt(document.getElementById('paragraphs').value);
 
-  // Generate a placeholder story
-  const story = `Once upon a time, in a ${setting}, there was a ${character} who embarked on an epic ${genre} adventure...`;
+  // Generate a detailed story
+  const story = generateStory(genre, character, setting, paragraphs);
 
   document.getElementById('generated-story').textContent = story;
   document.getElementById('story-preview').classList.remove('hidden');
@@ -30,8 +31,26 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   doc.setFontSize(18);
   doc.text('Your Epic Story', 10, 20);
   doc.setFontSize(12);
-  doc.text(story, 10, 30, { maxWidth: 180 });
+  const lines = doc.splitTextToSize(story, 180);
+  doc.text(lines, 10, 30);
 
   // Save the PDF
   doc.save('epic-story.pdf');
 });
+
+// Story Generator Function
+function generateStory(genre, character, setting, paragraphs) {
+  const plotPoints = [
+    `In a world of ${setting}, ${character} faced an unexpected challenge.`,
+    `As ${character} ventured deeper into ${setting}, they discovered a hidden truth.`,
+    `The journey tested ${character}'s courage and resolve.`,
+    `With each step, ${character} grew stronger and wiser.`,
+    `In the end, ${character} emerged victorious, forever changed by their epic ${genre} adventure.`,
+  ];
+
+  let story = '';
+  for (let i = 0; i < paragraphs; i++) {
+    story += plotPoints[i % plotPoints.length] + '\n\n';
+  }
+  return story.trim();
+}
