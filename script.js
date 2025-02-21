@@ -34,17 +34,11 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   const lines = doc.splitTextToSize(story, 180);
   doc.text(lines, 10, 30);
 
-  // Save the PDF as a data URL
-  const pdfDataUrl = doc.output('datauristring');
+  // Save the PDF as a Blob
+  const pdfBlob = doc.output('blob');
 
-  // Create a hidden <a> tag to handle the download
-  const a = document.createElement('a');
-  a.href = pdfDataUrl;
-  a.download = 'epic-story.pdf';
-  a.style.display = 'none';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  // Use FileSaver.js to trigger the download
+  saveAs(pdfBlob, 'epic-story.pdf');
 });
 
 // Clear Text
