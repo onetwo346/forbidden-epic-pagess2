@@ -34,17 +34,17 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   const lines = doc.splitTextToSize(story, 180);
   doc.text(lines, 10, 30);
 
-  // Save the PDF as a data URL
-  const pdfDataUrl = doc.output('datauristring');
+  // Save the PDF directly without opening a new tab
+  const pdfBlob = doc.output('blob');
+  const pdfUrl = URL.createObjectURL(pdfBlob);
 
-  // Create a hidden <a> tag to handle the download
   const a = document.createElement('a');
-  a.href = pdfDataUrl;
+  a.href = pdfUrl;
   a.download = 'epic-story.pdf';
-  a.style.display = 'none';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+  URL.revokeObjectURL(pdfUrl);
 });
 
 // Clear Text
