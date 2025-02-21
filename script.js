@@ -109,6 +109,10 @@ window.addEventListener('load', function () {
   const savedParagraphs = localStorage.getItem('paragraphs');
 
   if (savedStory) {
+    // Skip the intro page and go straight to the main page
+    showMainPage();
+
+    // Restore the story and form inputs
     document.getElementById('generated-story').textContent = savedStory;
     document.getElementById('genre').value = savedGenre;
     document.getElementById('character').value = savedCharacter;
