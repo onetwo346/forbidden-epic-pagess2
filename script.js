@@ -103,10 +103,6 @@ function generateStory(genre, character, setting, paragraphs) {
 // Restore Story on Page Load
 window.addEventListener('load', function () {
   const savedStory = localStorage.getItem('generatedStory');
-  const savedGenre = localStorage.getItem('genre');
-  const savedCharacter = localStorage.getItem('character');
-  const savedSetting = localStorage.getItem('setting');
-  const savedParagraphs = localStorage.getItem('paragraphs');
 
   if (savedStory) {
     // Skip the intro page and go straight to the main page
@@ -114,10 +110,10 @@ window.addEventListener('load', function () {
 
     // Restore the story and form inputs
     document.getElementById('generated-story').textContent = savedStory;
-    document.getElementById('genre').value = savedGenre;
-    document.getElementById('character').value = savedCharacter;
-    document.getElementById('setting').value = savedSetting;
-    document.getElementById('paragraphs').value = savedParagraphs;
+    document.getElementById('genre').value = localStorage.getItem('genre');
+    document.getElementById('character').value = localStorage.getItem('character');
+    document.getElementById('setting').value = localStorage.getItem('setting');
+    document.getElementById('paragraphs').value = localStorage.getItem('paragraphs');
     document.getElementById('story-preview').classList.remove('hidden');
   }
 });
