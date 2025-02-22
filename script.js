@@ -31,7 +31,7 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   doc.setFontSize(18);
   doc.text('Your Epic Story', 10, 20);
   doc.setFontSize(12);
-  const lines = doc.splitTextToSize(story, 180);
+  const lines = doc.splitTextToSize(story, 1800);
   doc.text(lines, 10, 30);
 
   // Save the PDF as a Blob
