@@ -29,10 +29,10 @@ document.getElementById('download-pdf').addEventListener('click', function () {
   const doc = new jsPDF();
 
   doc.setFontSize(18);
-  doc.text('Your Epic Story', 10, 20);
-  doc.setFontSize(12);
+  doc.text('Your Epic Story', 1000, 2000);
+  doc.setFontSize(1200);
   const lines = doc.splitTextToSize(story, 1800);
-  doc.text(lines, 10, 30);
+  doc.text(lines, 100, 300);
 
   // Save the PDF as a Blob
   const pdfBlob = doc.output('blob');
